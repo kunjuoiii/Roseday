@@ -3,102 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Rose Day ❤️</title>
+
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        background: linear-gradient(135deg, #ff758c, #ff7eb3);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Segoe UI', sans-serif;
-        color: white;
-        text-align: center;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
 
-    .card {
-        background: rgba(255, 255, 255, 0.15);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        max-width: 420px;
-        backdrop-filter: blur(8px);
-        animation: fadeIn 2s ease;
-    }
+.card {
+    background: rgba(255,255,255,0.15);
+    padding: 35px;
+    border-radius: 22px;
+    max-width: 420px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    animation: fadeIn 2s ease;
+}
 
-    h1 {
-        font-size: 2.6em;
-        margin-bottom: 10px;
-    }
+h1 {
+    font-size: 2.4em;
+    margin-bottom: 5px;
+}
 
-    h2 {
-        font-weight: normal;
-        margin-bottom: 20px;
-    }
+h2 {
+    font-weight: normal;
+    margin-bottom: 15px;
+}
 
-    .rose {
-        font-size: 90px;
-        animation: pulse 2s infinite;
-        margin: 15px 0;
-    }
+/* SLIDESHOW */
+.slideshow {
+    width: 230px;
+    height: 230px;
+    margin: 15px auto;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid rgba(255,255,255,0.8);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
 
-    p {
-        font-size: 1.1em;
-        line-height: 1.6;
-    }
+.slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
 
-    .from {
-        margin-top: 25px;
-        font-style: italic;
-        opacity: 0.9;
-    }
+.slideshow img.active {
+    opacity: 1;
+}
 
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
+.rose {
+    font-size: 70px;
+    margin: 10px 0;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+p {
+    font-size: 1.05em;
+    line-height: 1.6;
+}
 
-    /* floating hearts */
-    .heart {
-        position: absolute;
-        color: rgba(255,255,255,0.7);
-        font-size: 20px;
-        animation: floatUp 6s linear infinite;
-    }
+.from {
+    margin-top: 20px;
+    font-style: italic;
+    opacity: 0.9;
+}
 
-    @keyframes floatUp {
-        0% {
-            transform: translateY(100vh) scale(1);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(-10vh) scale(1.5);
-            opacity: 0;
-        }
-    }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* floating hearts */
+.heart {
+    position: absolute;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(1); opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+}
 </style>
 </head>
+
 <body>
 
 <div class="card">
     <h1>Happy Rose Day 🌹</h1>
     <h2>My Love ❤️</h2>
 
+    <!-- Slideshow -->
+    <div class="slideshow">
+        <img src="photo1.jpg" class="active">
+        <img src="photo2.jpg">
+        <img src="photo3.jpg">
+        <img src="photo4.jpg">
+    </div>
+
     <div class="rose">🌹</div>
 
     <p>
-        This rose is not just a flower,<br>
-        it carries my love, care, and feelings for you.<br><br>
-        Just like a rose makes everything beautiful,<br>
-        you make my life colorful and complete 💕
+        Every picture holds a memory,<br>
+        every memory holds my heart ❤️<br><br>
+        With you, every day feels special.
     </p>
 
     <div class="from">
@@ -106,22 +126,26 @@
     </div>
 </div>
 
-<!-- hearts -->
 <script>
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-        document.body.appendChild(heart);
+let slides = document.querySelectorAll(".slideshow img");
+let index = 0;
 
-        setTimeout(() => {
-            heart.remove();
-        }, 6000);
-    }
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 3000); // change photo every 3 seconds
 
-    setInterval(createHeart, 300);
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 300);
 </script>
 
 </body>
